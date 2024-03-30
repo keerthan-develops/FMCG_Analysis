@@ -1,0 +1,3 @@
+{ "Text1":"hello", "Text2":"goodbye", "Num1":5, "Array1":[7,8,9] }
+{ "Text1":"this", "Text2":"that", "Num1":6.6, "Array1":[77,88,99] }
+{ "Text1":"yes", "Text2":"no", "Num1":-0.03, "Array1":[555,444,222] }

@@ -1,0 +1,22 @@
+clp and cogo 
+- temporaryClosures is element struct in clp and element string in cogo
+Resolution : cogo -> make temporaryClosures as struct in cogo and explode it to have 2 sub columns as clp
+
+clp and dats
+- temporaryClosures is element struct in clp and element string in cogo
+        Resolution : dats -> make temporaryClosures as struct in cogo and explode it to have 2 sub columns as clp
+- handoverServices
+        Resolution : dats -> add handoverServices with matching sub struct in dats
+- placeSearchOpeningHours
+        Resolution : dats -> add placeSearchOpeningHours with matching sub struct in dats
+- sellingPartners
+        Resolution : dats -> add sellingPartners with matching sub struct in dats
+
+clp and okay (No Change needed)
+- Same Schema
+
+clp and spar
+- handoverServices
+        Resolution : spar -> add handoverServices with matching sub struct in spar
+- sellingPartners
+        Resolution : spar -> add sellingPartners with matching sub struct in spar

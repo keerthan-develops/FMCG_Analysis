@@ -1,0 +1,4 @@
+Text1|Text2|Num1|JSON1
+hello | goodbye | 5 | [{"Sub1":"stop", "Sub2":3}, {"Sub1":"go", "Sub2":6}]
+this | that | 6.6 | [{"Sub1":"eggs", "Sub2":4}, {"Sub1":"bacon", "Sub2":8}]
+yes | no | -0.03 | [{"Sub1":"apple", "Sub2":5}, {"Sub1":"pear", "Sub2":10}]
