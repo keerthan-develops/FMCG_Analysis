@@ -9,7 +9,7 @@ logger_obj = setLogger(logger, 'transform')
 logger = logger_obj.set_handler()
 logger.info('Class transform global attribute section')
 
-class transform:
+class brands:
 
     def __init__(self, abs_file_path, spark):
         self.abs_file_path = abs_file_path
@@ -181,3 +181,24 @@ class transform:
         logger.info(f'{self.brand} > Schema Check')
         logger.info(self.organised_schema_df.count())
         return self.organised_schema_df
+    
+
+class datasetTransform:
+    def __init__(self, spark):
+        self.spark = spark
+
+    def extract_postal_code(self, df):
+        self.df = df
+        self.postal_cd_df = self.df.withColumn('postalcode', col('address.postalcode'))
+        self.postal_cd_df.select('postalcode').show(10,0)
+        self.postal_cd_df.count()
+
+    def read_postal_code_mapping_config(self, file_path):
+        self.file_path = file_path
+        self.config_schema = StructType([
+            StructField('province', StringType(), False),
+            StructField('postalcode_range', StringType(), False)
+        ])
+        self.postal_df = self.spark.read.option('delimiter', ':').schema(self.config_schema).csv(self.file_path)
+        self.postal_df.show(100, 0)
+        self.postal_df.count()

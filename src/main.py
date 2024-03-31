@@ -5,7 +5,7 @@ from pyspark.sql.functions import from_json, to_json, col, udf, explode, lit, co
 import logging
 from setLogger import setLogger
 from resolvePath import resolvePath
-from transform import transform
+from transform import brands
 
 if __name__ == "__main__":
     print('Main Function executed')
@@ -31,24 +31,24 @@ if __name__ == "__main__":
 
     # Resolve paths
     path_obj = resolvePath()
-    data_dir, clp_path, cogo_path, dats_path, okay_path, spar_path, log_path = path_obj.get_path()
+    data_dir, clp_path, cogo_path, dats_path, okay_path, spar_path, log_path, postal_config_path = path_obj.get_path()
 
     # Create a transform object and load CLP data into a dataframe
-    clp_obj = transform(clp_path, spark)
+    clp_obj = brands(clp_path, spark)
     clp_df = clp_obj.get_data_by_brand('CLP')
 
-    cogo_obj = transform(cogo_path, spark)
+    cogo_obj = brands(cogo_path, spark)
     cogo_df = cogo_obj.get_data_by_brand('COGO')
 
-    dats_obj = transform(dats_path, spark)
+    dats_obj = brands(dats_path, spark)
     dats_df = dats_obj.get_data_by_brand('DATS')
     logger.info('DATS DATS DATS')
     logger.info(dats_df.printSchema())
 
-    okay_obj = transform(okay_path, spark)
+    okay_obj = brands(okay_path, spark)
     okay_df = okay_obj.get_data_by_brand('OKAY')
 
-    spar_obj = transform(spar_path, spark)
+    spar_obj = brands(spar_path, spark)
     spar_df = spar_obj.get_data_by_brand('SPAR')
 
     
@@ -131,8 +131,8 @@ if __name__ == "__main__":
 
     
     # Union of all brands
-    clp_cogo_okay_spar_dats = transform.union_brands(clp_df7, cogo_df7, okay_df7, spar_df7, dats_df5)
-    logger.info(f'clp_cogo_okay_spar_dats count > {clp_cogo_okay_spar_dats.count()}')
+    merged_df = brands.union_brands(clp_df7, cogo_df7, okay_df7, spar_df7, dats_df5)
+    logger.info(f'merged_df count > {merged_df.count()}')
     
     
     

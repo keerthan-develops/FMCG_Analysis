@@ -11,7 +11,7 @@ class setLogger:
         repo_dir = str(Path().resolve()).replace('/src', '')
 
         # Set the log level
-        logging.basicConfig(level='INFO')
+        logging.basicConfig(level='ERROR')
 
         formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
