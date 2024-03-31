@@ -1,0 +1,71 @@
+2024-03-31 14:41:10,179 - __main__ - INFO - Log test
+2024-03-31 14:41:10,179 - __main__ - INFO - Logger succesfully created
+2024-03-31 14:41:14,080 - __main__ - INFO - CLP DF2 count > 259
+2024-03-31 14:41:14,136 - __main__ - INFO - COGO DF2 count > 276
+2024-03-31 14:41:14,575 - __main__ - INFO - OKAY DF2 count > 169
+2024-03-31 14:41:15,053 - __main__ - INFO - SPAR DF2 count > 217
+2024-03-31 14:41:17,853 - __main__ - INFO - None
+2024-03-31 14:41:17,853 - __main__ - INFO - None
+2024-03-31 14:41:18,171 - __main__ - INFO - clp_cogo_okay_spar count > 5280
+rs/keerthan/Projects/FMCG_Analysis/data/cogo-colpnts.json
+2024-03-31 14:41:12,637 - transform - INFO - Get data by Brand COGO from path /Users/keerthan/Projects/FMCG_Analysis/data/cogo-colpnts.json.
+2024-03-31 14:41:12,872 - transform - INFO - Transform object instantiated > /Users/keerthan/Projects/FMCG_Analysis/data/dats-places.json
+2024-03-31 14:41:12,872 - transform - INFO - Get data by Brand DATS from path /Users/keerthan/Projects/FMCG_Analysis/data/dats-places.json.
+2024-03-31 14:41:13,031 - transform - INFO - Transform object instantiated > /Users/keerthan/Projects/FMCG_Analysis/data/okay-places.json
+2024-03-31 14:41:13,031 - transform - INFO - Get data by Brand OKAY from path /Users/keerthan/Projects/FMCG_Analysis/data/okay-places.json.
+2024-03-31 14:41:13,190 - transform - INFO - Transform object instantiated > /Users/keerthan/Projects/FMCG_Analysis/data/spar-places.json
+2024-03-31 14:41:13,190 - transform - INFO - Get data by Brand SPAR from path /Users/keerthan/Projects/FMCG_Analysis/data/spar-places.json.
+2024-03-31 14:41:13,374 - transform - INFO - Separating empty and non empty arrays for exploding
+2024-03-31 14:41:13,549 - transform - INFO - CLP > Transforming temporaryClosures
+2024-03-31 14:41:13,659 - transform - INFO - CLP > Extracting struct attributes for struct temporaryClosures > ['from', 'till']
+2024-03-31 14:41:13,659 - transform - INFO - CLP > temporaryClosures_from
+2024-03-31 14:41:13,765 - transform - INFO - CLP > temporaryClosures_till
+2024-03-31 14:41:14,136 - transform - INFO - Separating empty and non empty arrays for exploding
+2024-03-31 14:41:14,230 - transform - INFO - OKAY > Transforming temporaryClosures
+2024-03-31 14:41:14,287 - transform - INFO - OKAY > Extracting struct attributes for struct temporaryClosures > ['from', 'till']
+2024-03-31 14:41:14,287 - transform - INFO - OKAY > temporaryClosures_from
+2024-03-31 14:41:14,337 - transform - INFO - OKAY > temporaryClosures_till
+2024-03-31 14:41:14,575 - transform - INFO - Separating empty and non empty arrays for exploding
+2024-03-31 14:41:14,687 - transform - INFO - SPAR > Transforming temporaryClosures
+2024-03-31 14:41:14,725 - transform - INFO - SPAR > Extracting struct attributes for struct temporaryClosures > ['from', 'till']
+2024-03-31 14:41:14,725 - transform - INFO - SPAR > temporaryClosures_from
+2024-03-31 14:41:14,810 - transform - INFO - SPAR > temporaryClosures_till
+2024-03-31 14:41:15,053 - transform - INFO - CLP > Transforming handoverServices
+2024-03-31 14:41:15,141 - transform - INFO - COGO > Transforming handoverServices
+2024-03-31 14:41:15,191 - transform - INFO - OKAY > Transforming handoverServices
+2024-03-31 14:41:15,254 - transform - INFO - CLP > Transforming sellingPartners
+2024-03-31 14:41:15,353 - transform - INFO - COGO > Transforming sellingPartners
+2024-03-31 14:41:15,421 - transform - INFO - OKAY > Transforming sellingPartners
+2024-03-31 14:41:15,480 - transform - INFO - SPAR > Adding default string columns ['handoverServices', 'sellingPartners']
+2024-03-31 14:41:15,486 - transform - INFO - CLP > Transforming placeSearchOpeningHours
+2024-03-31 14:41:15,610 - transform - INFO - COGO > Transforming placeSearchOpeningHours
+2024-03-31 14:41:15,672 - transform - INFO - OKAY > Transforming placeSearchOpeningHours
+2024-03-31 14:41:15,770 - transform - INFO - SPAR > Transforming placeSearchOpeningHours
+2024-03-31 14:41:15,859 - transform - INFO - CLP > Extracting struct attributes for struct placeSearchOpeningHours > ['date', 'opens', 'closes', 'isToday', 'isOpenForTheDay']
+2024-03-31 14:41:15,859 - transform - INFO - CLP > placeSearchOpeningHours_date
+2024-03-31 14:41:16,025 - transform - INFO - CLP > placeSearchOpeningHours_opens
+2024-03-31 14:41:16,138 - transform - INFO - CLP > placeSearchOpeningHours_closes
+2024-03-31 14:41:16,260 - transform - INFO - CLP > placeSearchOpeningHours_isToday
+2024-03-31 14:41:16,344 - transform - INFO - CLP > placeSearchOpeningHours_isOpenForTheDay
+2024-03-31 14:41:16,465 - transform - INFO - COGO > Extracting struct attributes for struct placeSearchOpeningHours > ['date', 'opens', 'closes', 'isToday', 'isOpenForTheDay']
+2024-03-31 14:41:16,465 - transform - INFO - COGO > placeSearchOpeningHours_date
+2024-03-31 14:41:16,542 - transform - INFO - COGO > placeSearchOpeningHours_opens
+2024-03-31 14:41:16,620 - transform - INFO - COGO > placeSearchOpeningHours_closes
+2024-03-31 14:41:16,680 - transform - INFO - COGO > placeSearchOpeningHours_isToday
+2024-03-31 14:41:16,742 - transform - INFO - COGO > placeSearchOpeningHours_isOpenForTheDay
+2024-03-31 14:41:16,802 - transform - INFO - OKAY > Extracting struct attributes for struct placeSearchOpeningHours > ['date', 'opens', 'closes', 'isToday', 'isOpenForTheDay']
+2024-03-31 14:41:16,802 - transform - INFO - OKAY > placeSearchOpeningHours_date
+2024-03-31 14:41:16,865 - transform - INFO - OKAY > placeSearchOpeningHours_opens
+2024-03-31 14:41:16,958 - transform - INFO - OKAY > placeSearchOpeningHours_closes
+2024-03-31 14:41:17,020 - transform - INFO - OKAY > placeSearchOpeningHours_isToday
+2024-03-31 14:41:17,131 - transform - INFO - OKAY > placeSearchOpeningHours_isOpenForTheDay
+2024-03-31 14:41:17,211 - transform - INFO - SPAR > Extracting struct attributes for struct placeSearchOpeningHours > ['date', 'opens', 'closes', 'isToday', 'isOpenForTheDay']
+2024-03-31 14:41:17,211 - transform - INFO - SPAR > placeSearchOpeningHours_date
+2024-03-31 14:41:17,368 - transform - INFO - SPAR > placeSearchOpeningHours_opens
+2024-03-31 14:41:17,450 - transform - INFO - SPAR > placeSearchOpeningHours_closes
+2024-03-31 14:41:17,548 - transform - INFO - SPAR > placeSearchOpeningHours_isToday
+2024-03-31 14:41:17,652 - transform - INFO - SPAR > placeSearchOpeningHours_isOpenForTheDay
+2024-03-31 14:41:17,747 - transform - INFO - spar class instanstiated to modify the schema of SPAR brand dataframe
+2024-03-31 14:41:17,760 - transform - INFO - SPAR > organise_spar_schema
+2024-03-31 14:41:17,797 - transform - INFO - <class 'pyspark.sql.dataframe.DataFrame'>
+2024-03-31 14:41:17,853 - transform - INFO - 430
