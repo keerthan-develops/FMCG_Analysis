@@ -5,7 +5,7 @@ from pyspark.sql.functions import from_json, to_json, col, udf, explode, lit, co
 import logging
 from setLogger import setLogger
 from resolvePath import resolvePath
-from transform import transform, spar
+from transform import transform
 
 if __name__ == "__main__":
     print('Main Function executed')
@@ -42,6 +42,8 @@ if __name__ == "__main__":
 
     dats_obj = transform(dats_path, spark)
     dats_df = dats_obj.get_data_by_brand('DATS')
+    logger.info('DATS DATS DATS')
+    logger.info(dats_df.printSchema())
 
     okay_obj = transform(okay_path, spark)
     okay_df = okay_obj.get_data_by_brand('OKAY')
@@ -62,6 +64,9 @@ if __name__ == "__main__":
 
     spar_df2= spar_obj.transform_tempClosure_attr(spar_df)
     logger.info(f'SPAR DF2 count > {spar_df2.count()}')
+
+    dats_df2= dats_obj.transform_tempClosure_attr(dats_df)
+    logger.info(f'SPAR DF2 count > {dats_df2.count()}')
 
     
     # handoverServices attribute transformation
@@ -93,15 +98,41 @@ if __name__ == "__main__":
     okay_df6 = okay_obj.extract_struct_attributes(okay_df5, 'placeSearchOpeningHours', struct_placeSearchOpeningHours_attr_list)
     spar_df5 = spar_obj.extract_struct_attributes(spar_df4, 'placeSearchOpeningHours', struct_placeSearchOpeningHours_attr_list)
 
-    spar_unique_obj = spar('SPAR', spar_path, spark)
-    spar_df6 = spar_unique_obj.organise_spar_schema(spar_df5)
 
-    logger.info(clp_df6.printSchema())
-    logger.info(spar_df6.printSchema())
+    # DATS > add all the missing columns with default values
+                
+    dats_missing_columns_list = ['handoverServices', 'sellingPartners', 'placeSearchOpeningHours_date', \
+                                 'placeSearchOpeningHours_opens', 'placeSearchOpeningHours_opens',\
+                                 'placeSearchOpeningHours_closes', 'placeSearchOpeningHours_isToday',\
+                                 'placeSearchOpeningHours_isOpenForTheDay', 'placeSearchOpeningHours'\
+                                 ]
+    dats_df3 = dats_obj.add_default_string_column(dats_df2, dats_missing_columns_list)
+    logger.info(f'DATS post adding default columns')
+    logger.debug(dats_df3.printSchema())
+
+
+    # Organising schema
+    spar_df6 = spar_obj.organise_schema(spar_df5)
+    dats_df4 = dats_obj.organise_schema(dats_df3)
+
+
+    # Drop placeSearchOpeningHours 
+    drop_col_list = ('placeSearchOpeningHours', 'placeSearchOpeningHours_isOpenForTheDay', 'placeSearchOpeningHours_isToday')
+    clp_df7 = clp_obj.drop_columns(clp_df6, drop_col_list)
+    cogo_df7 = cogo_obj.drop_columns(cogo_df6, drop_col_list)
+    okay_df7 = okay_obj.drop_columns(okay_df6, drop_col_list)
+    spar_df7 = spar_obj.drop_columns(spar_df6, drop_col_list)
+    dats_df5 = dats_obj.drop_columns(dats_df4, drop_col_list)
+
+    logger.debug(f'Final CLP schema for clp_df7')
+    logger.debug(clp_df7.printSchema())
+    logger.debug(f'Final DATS schema for dats_df5')
+    logger.debug(dats_df5.printSchema())
+
     
     # Union of all brands
-    clp_cogo_okay_spar = transform.union_brands(clp_df6, cogo_df6, okay_df6, spar_df6)
-    logger.info(f'clp_cogo_okay_spar count > {clp_cogo_okay_spar.count()}')
+    clp_cogo_okay_spar_dats = transform.union_brands(clp_df7, cogo_df7, okay_df7, spar_df7, dats_df5)
+    logger.info(f'clp_cogo_okay_spar_dats count > {clp_cogo_okay_spar_dats.count()}')
     
     
     
