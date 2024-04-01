@@ -38,7 +38,7 @@ class resolvePath:
         spar_path = str(data_dir / 'spar-places.json')
         logger.debug(Path(spar_path).is_file())
         log_path = Path(self.repo_dir) / 'logs'
-        postal_config_path = str(data_dir / 'postal_code_mapping.txt')
+        postal_config_path = str(data_dir / 'postal_code_mapping.json')
         logger.debug(Path(postal_config_path).is_file())
 
         return data_dir, clp_path, cogo_path, dats_path, okay_path, spar_path, log_path, postal_config_path
