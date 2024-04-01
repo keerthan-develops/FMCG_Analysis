@@ -5,7 +5,7 @@ from pyspark.sql.functions import from_json, to_json, col, udf, explode, lit, co
 import logging
 from setLogger import setLogger
 from resolvePath import resolvePath
-from transform import brands
+from transform import brands, datasetTransform
 
 if __name__ == "__main__":
     print('Main Function executed')
@@ -42,8 +42,6 @@ if __name__ == "__main__":
 
     dats_obj = brands(dats_path, spark)
     dats_df = dats_obj.get_data_by_brand('DATS')
-    logger.info('DATS DATS DATS')
-    logger.info(dats_df.printSchema())
 
     okay_obj = brands(okay_path, spark)
     okay_df = okay_obj.get_data_by_brand('OKAY')
@@ -108,7 +106,6 @@ if __name__ == "__main__":
                                  ]
     dats_df3 = dats_obj.add_default_string_column(dats_df2, dats_missing_columns_list)
     logger.info(f'DATS post adding default columns')
-    logger.debug(dats_df3.printSchema())
 
 
     # Organising schema
@@ -123,16 +120,15 @@ if __name__ == "__main__":
     okay_df7 = okay_obj.drop_columns(okay_df6, drop_col_list)
     spar_df7 = spar_obj.drop_columns(spar_df6, drop_col_list)
     dats_df5 = dats_obj.drop_columns(dats_df4, drop_col_list)
-
-    logger.debug(f'Final CLP schema for clp_df7')
-    logger.debug(clp_df7.printSchema())
-    logger.debug(f'Final DATS schema for dats_df5')
-    logger.debug(dats_df5.printSchema())
-
     
     # Union of all brands
     merged_df = brands.union_brands(clp_df7, cogo_df7, okay_df7, spar_df7, dats_df5)
     logger.info(f'merged_df count > {merged_df.count()}')
+
+    # Create an object of class datasetTransform
+    dt_obj = datasetTransform(spark)
+    postal_cd_df = dt_obj.extract_postal_code(merged_df)
+    province_df = dt_obj.get_province_from_postal_config(postal_cd_df)
     
     
     
