@@ -186,7 +186,7 @@ class brands:
 class datasetTransform:
     
     def __init__(self, spark):
-        self.spark = spark
+        spark = spark
         logger.debug('datasetTransform class is initiated')
 
     @staticmethod

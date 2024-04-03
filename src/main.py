@@ -6,9 +6,9 @@ import logging
 from setLogger import setLogger
 from resolvePath import resolvePath
 from transform import brands, datasetTransform as dt
+from encrypt import generateEncryptionKeys, encrypt
 
 if __name__ == "__main__":
-    print('Main Function executed')
 
     findspark.init()
 
@@ -27,11 +27,11 @@ if __name__ == "__main__":
     # Call the setLogger method to instantiate handler
     logger_obj = setLogger(logger, 'main')
     logger = logger_obj.set_handler()
-    logger.info('Logger succesfully created')
+    logger.info('FMCG analysis job starts')
 
     # Resolve paths
     path_obj = resolvePath()
-    data_dir, clp_path, cogo_path, dats_path, okay_path, spar_path, log_path, publish_dir = path_obj.get_path()
+    data_dir, clp_path, cogo_path, dats_path, okay_path, spar_path, log_path, publish_df_path, publish_encrypt_path = path_obj.get_path()
 
     # Create a transform object and load CLP data into a dataframe
     clp_obj = brands(clp_path, spark)
@@ -125,13 +125,20 @@ if __name__ == "__main__":
     merged_df = brands.union_brands(clp_df7, cogo_df7, okay_df7, spar_df7, dats_df5)
     logger.info(f'merged_df count > {merged_df.count()}')
 
-    # Create an object of class datasetTransform
-    dt_obj = dt(spark)
-    postal_cd_df = dt_obj.extract_postal_code(merged_df)
-    province_df = dt_obj.get_province_from_postal_config(postal_cd_df)
-    lat_long_df = dt_obj.extract_lat_long(province_df)
+    # Transform attributes using datasetTransform class from module transform.py
+    postal_cd_df = dt.extract_postal_code(merged_df)
+    province_df = dt.get_province_from_postal_config(postal_cd_df)
+    lat_long_df = dt.extract_lat_long(province_df)
+
+    # GDPR : Masking address attributes 'houseNumber' and 'streetName'
+    generateEncryptionKeys(spark, lat_long_df, publish_encrypt_path)
+    masked_df = encrypt(spark, publish_encrypt_path)
     
-    lat_long_df.write.partitionBy('brand').mode('overwrite').parquet(publish_dir)
+    masked_df.write.partitionBy('brand').mode('overwrite').parquet(publish_df_path)
+
+    logger.info(f'FMCG Brand transformed dataset has been saved to publish directory')
+
+    spark.stop()
     
     
     

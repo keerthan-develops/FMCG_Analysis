@@ -47,7 +47,10 @@ class resolvePath:
         
         log_path = Path(repo_dir) / 'logs'
         
-        publish_dir = str(repo_dir / 'publish' / 'fmcg_analysis')
-        logger.debug(Path(publish_dir).is_dir())
+        publish_df_path = str(repo_dir / 'publish' / 'fmcg_analysis')
+        logger.debug(Path(publish_df_path).is_dir())
 
-        return data_dir, clp_path, cogo_path, dats_path, okay_path, spar_path, log_path, publish_dir
+        publish_encrypt_path = str(repo_dir / 'publish' / 'encryption_keys')
+        logger.debug(Path(publish_df_path).is_dir())
+
+        return data_dir, clp_path, cogo_path, dats_path, okay_path, spar_path, log_path, publish_df_path, publish_encrypt_path

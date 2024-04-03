@@ -1,7 +1,6 @@
 # Files to be ignored
 .DS_Store
 src/test_main.ipynb
-src/test.ipynb
 
 # Directories to be ignored
 pyspark_fmcg/
@@ -9,6 +8,8 @@ src/__pycache__/
 src/.ipynb_checkpoints/
 logs/.ipynb_checkpoints/
 test/.DS_Store/
+publish/psuedo_fmcg/
+publish/encryption_keys/
 
 # Extensions to be ignored
 *.pyc

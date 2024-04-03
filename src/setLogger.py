@@ -32,6 +32,6 @@ class setLogger:
         # Add the handler to the logger
         self.logger.addHandler(handler)
 
-        self.logger.info('Log test')
+        self.logger.info('Custom Logger created')
 
         return self.logger
