@@ -1,6 +1,7 @@
 # Files to be ignored
 .DS_Store
 src/test_main.ipynb
+src/test.ipynb
 
 # Directories to be ignored
 pyspark_fmcg/
