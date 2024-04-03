@@ -1,10 +1,10 @@
-2024-04-02 01:27:44,546 - __main__ - INFO - Log test
-2024-04-02 01:27:44,546 - __main__ - INFO - Logger succesfully created
-2024-04-02 01:27:47,852 - __main__ - INFO - CLP DF2 count > 259
-2024-04-02 01:27:47,897 - __main__ - INFO - COGO DF2 count > 276
-2024-04-02 01:27:48,308 - __main__ - INFO - OKAY DF2 count > 169
-2024-04-02 01:27:48,719 - __main__ - INFO - SPAR DF2 count > 217
-2024-04-02 01:27:48,971 - __main__ - INFO - SPAR DF2 count > 145
-2024-04-02 01:27:49,921 - __main__ - INFO - DATS post adding default columns
-2024-04-02 01:27:50,410 - __main__ - INFO - merged_df count > 5425
-2024-04-02 01:27:50,644 - transform - INFO - get_province_from_postal_config function called.
+2024-04-03 18:58:48,183 - __main__ - INFO - Log test
+2024-04-03 18:58:48,183 - __main__ - INFO - Logger succesfully created
+2024-04-03 18:58:56,420 - __main__ - INFO - CLP DF2 count > 259
+2024-04-03 18:58:56,463 - __main__ - INFO - COGO DF2 count > 276
+2024-04-03 18:58:56,870 - __main__ - INFO - OKAY DF2 count > 169
+2024-04-03 18:58:57,264 - __main__ - INFO - SPAR DF2 count > 217
+2024-04-03 18:58:57,548 - __main__ - INFO - SPAR DF2 count > 145
+2024-04-03 18:58:58,573 - __main__ - INFO - DATS post adding default columns
+2024-04-03 18:58:59,110 - __main__ - INFO - merged_df count > 5425
+2024-04-03 18:58:59,361 - transform - INFO - get_province_from_postal_config function called.

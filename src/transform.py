@@ -147,7 +147,7 @@ class brands:
 
     def organise_schema(self, df):
         self.df = df
-        self.df.registerTempTable(f'{self.brand}')
+        self.df.createOrReplaceTempView(f'{self.brand}')
         logger.debug(f'{self.brand} > organise_schema')
         
         select_query = f"""
@@ -184,20 +184,22 @@ class brands:
     
 
 class datasetTransform:
+    
     def __init__(self, spark):
         self.spark = spark
         logger.debug('datasetTransform class is initiated')
 
-    def extract_postal_code(self, df):
+    @staticmethod
+    def extract_postal_code(df):
         logger.debug('extract_postal_code from address function called')
-        self.df = df
-        self.postal_cd_df = self.df.withColumn('postalcode', col('address.postalcode'))
-        #self.postal_cd_df.select('postalcode').show(10,0)
-        self.postal_cd_df.count()
-        return self.postal_cd_df
+        df = df
+        postal_cd_df = df.withColumn('postalcode', col('address.postalcode'))
+        postal_cd_df.count()
+        return postal_cd_df
 
-    def get_province_from_postal_config(self, df):
-        self.df = df
+    @staticmethod
+    def get_province_from_postal_config(df):
+        df = df
         logger.info(f'get_province_from_postal_config function called.')
         
         def derive_province(postal_val):
@@ -231,7 +233,15 @@ class datasetTransform:
         
         derive_province_udf = udf(lambda x : derive_province(x), StringType())
 
-        self.province_df = self.df.withColumn('province', derive_province_udf(col('postalcode')))
-        return self.province_df
+        province_df = df.withColumn('province', derive_province_udf(col('postalcode')))
+        return province_df
+    
+    @staticmethod
+    def extract_lat_long(df):
+        df = df
+        lat_long_df = df.withColumn('latitude', col('geoCoordinates.latitude')) \
+                                    .withColumn('longitude', col('geoCoordinates.longitude'))
+        return lat_long_df
+                
         
 

@@ -5,7 +5,7 @@ from pyspark.sql.functions import from_json, to_json, col, udf, explode, lit, co
 import logging
 from setLogger import setLogger
 from resolvePath import resolvePath
-from transform import brands, datasetTransform
+from transform import brands, datasetTransform as dt
 
 if __name__ == "__main__":
     print('Main Function executed')
@@ -31,7 +31,7 @@ if __name__ == "__main__":
 
     # Resolve paths
     path_obj = resolvePath()
-    data_dir, clp_path, cogo_path, dats_path, okay_path, spar_path, log_path, postal_config_path = path_obj.get_path()
+    data_dir, clp_path, cogo_path, dats_path, okay_path, spar_path, log_path, publish_dir = path_obj.get_path()
 
     # Create a transform object and load CLP data into a dataframe
     clp_obj = brands(clp_path, spark)
@@ -126,9 +126,12 @@ if __name__ == "__main__":
     logger.info(f'merged_df count > {merged_df.count()}')
 
     # Create an object of class datasetTransform
-    dt_obj = datasetTransform(spark)
+    dt_obj = dt(spark)
     postal_cd_df = dt_obj.extract_postal_code(merged_df)
     province_df = dt_obj.get_province_from_postal_config(postal_cd_df)
+    lat_long_df = dt_obj.extract_lat_long(province_df)
+    
+    lat_long_df.write.partitionBy('brand').mode('overwrite').parquet(publish_dir)
     
     
     

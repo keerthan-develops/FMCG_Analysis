@@ -1,4 +1,0 @@
-Text1|Text2|Num1|JSON1
-hello | goodbye | 5 | {"Sub1":"john", "Sub2":3}
-this | that | 6.6 | {"Sub1":"betty", "Sub2":4}
-yes | no | -0.03 | {"Sub1":"bobby", "Sub2":5}
