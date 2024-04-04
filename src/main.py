@@ -34,20 +34,20 @@ if __name__ == "__main__":
     data_dir, clp_path, cogo_path, dats_path, okay_path, spar_path, log_path, publish_df_path, publish_encrypt_path = path_obj.get_path()
 
     # Create a transform object and load CLP data into a dataframe
-    clp_obj = brands(clp_path, spark)
-    clp_df = clp_obj.get_data_by_brand('CLP')
+    clp_obj = brands(clp_path, spark, 'CLP')
+    clp_df = clp_obj.get_data_by_brand()
 
-    cogo_obj = brands(cogo_path, spark)
-    cogo_df = cogo_obj.get_data_by_brand('COGO')
+    cogo_obj = brands(cogo_path, spark, 'COGO')
+    cogo_df = cogo_obj.get_data_by_brand()
 
-    dats_obj = brands(dats_path, spark)
-    dats_df = dats_obj.get_data_by_brand('DATS')
+    dats_obj = brands(dats_path, spark, 'DATS')
+    dats_df = dats_obj.get_data_by_brand()
 
-    okay_obj = brands(okay_path, spark)
-    okay_df = okay_obj.get_data_by_brand('OKAY')
+    okay_obj = brands(okay_path, spark, 'OKAY')
+    okay_df = okay_obj.get_data_by_brand()
 
-    spar_obj = brands(spar_path, spark)
-    spar_df = spar_obj.get_data_by_brand('SPAR')
+    spar_obj = brands(spar_path, spark, 'SPAR')
+    spar_df = spar_obj.get_data_by_brand()
 
     
     # temperoryClosures attribute transformation
@@ -130,8 +130,11 @@ if __name__ == "__main__":
     province_df = dt.get_province_from_postal_config(postal_cd_df)
     lat_long_df = dt.extract_lat_long(province_df)
 
+    # Performing one-hot-encode on handoverServices
+    one_hot_enc_df = dt.one_hot_encode(lat_long_df, 'handoverServices')
+
     # GDPR : Masking address attributes 'houseNumber' and 'streetName'
-    generateEncryptionKeys(spark, lat_long_df, publish_encrypt_path)
+    generateEncryptionKeys(spark, one_hot_enc_df, publish_df_path, publish_encrypt_path)
     masked_df = encrypt(spark, publish_encrypt_path)
     
     masked_df.write.partitionBy('brand').mode('overwrite').parquet(publish_df_path)

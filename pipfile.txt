@@ -2,6 +2,7 @@ cffi==1.16.0
 cryptography==42.0.5
 fernet==1.0.1
 findspark==2.0.1
+numpy==1.26.4
 py4j==0.10.9.7
 pyaes==1.6.1
 pycparser==2.22

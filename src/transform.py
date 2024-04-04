@@ -2,39 +2,39 @@ import logging
 from setLogger import setLogger
 from pyspark.sql.functions import from_json, to_json, col, udf, explode, lit, coalesce
 from pyspark.sql.types import StructType, StructField, StringType, IntegerType, ArrayType
+from pyspark.ml.feature import StringIndexer
+from pyspark.ml.feature import OneHotEncoder
 import json
 
 logger = logging.getLogger(__name__)
 logger_obj = setLogger(logger, 'transform')
 logger = logger_obj.set_handler()
-logger.debug('Class transform global attribute section')
 
 class brands:
 
-    def __init__(self, abs_file_path, spark):
+    def __init__(self, abs_file_path, spark, brand: str):
         self.abs_file_path = abs_file_path
-        logger.debug(f'Transform object instantiated > {self.abs_file_path}')
+        logger.info(f'Transform object instantiated > {self.abs_file_path}')
         self.spark = spark
+        self.brand = brand
 
     
-    def get_data_by_brand(self, brand: str):
+    def get_data_by_brand(self):
         
-        self.brand = brand
-        logger.debug(f'Get data by Brand {self.brand} from path {self.abs_file_path}.')
+        logger.info(f'Get data by Brand {self.brand} from path {self.abs_file_path}.')
         
         self.brand_df = self.spark.read.options(Header=True).json(self.abs_file_path)
         self.brand_val_df = self.brand_df.withColumn('brand', lit(self.brand))
         
         logger.debug(f'Debugging : Schema, sample 3 records and count for brand {self.brand} file')
         #logger.debug(self.brand_val_df.printSchema())
-        #logger.debug(self.brand_val_df.show(3,0))
-        logger.debug(self.brand_val_df.count())
 
         return self.brand_val_df
     
     
     def transform_tempClosure_attr(self, df):
         self.df = df
+        logger.info(f'Transforming attribute : tempClosure for brand > {self.brand}')
 
         if self.brand == 'CLP' or self.brand == 'OKAY' or self.brand == 'SPAR' or self.brand == 'DATS':
             # Separating empty and non empty arrays for exploding
@@ -76,10 +76,16 @@ class brands:
     def explode_array_attribute(self, df, attr):
         self.df = df
         self.attr = attr
-        logger.debug(f'{self.brand} > Transforming {self.attr}')
+        logger.info(f'{self.brand} > Attempting to explode_array_attribute {self.attr}')
         self.exploded_df = self.df.withColumn(f'{self.attr}', explode(col(f'{self.attr}')))
         logger.debug(f'{self.brand} > Count after exploding {self.attr} > {self.exploded_df.count()}')
-        return self.exploded_df
+        try:    
+            self.exploded_filtered_df = self.exploded_df.filter(f" trim({self.attr}) != '' ").dropDuplicates()
+        except:
+            self.exploded_filtered_df = self.exploded_df.dropDuplicates()
+
+        logger.debug(f'{self.brand} > Count after filtering and dropping duplicates {self.attr} > {self.exploded_df.count()}')
+        return self.exploded_filtered_df
     
 
     def extract_struct_attributes(self, df, struct_name, struct_attr_list):
@@ -105,7 +111,7 @@ class brands:
         self.attr_list = attr_list
         self.default_value = ''
 
-        logger.debug(f'{self.brand} > Adding default string columns {self.attr_list}')
+        logger.info(f'{self.brand} > Adding default string columns {self.attr_list}')
 
         for self.attr in self.attr_list:
         
@@ -119,7 +125,7 @@ class brands:
         self.attr_dropped_df = self.df
         self.attr_tuple = attr_tuple
 
-        logger.debug(f'{self.brand} > Dropping columns > {self.attr_tuple}')
+        logger.info(f'{self.brand} > Dropping columns > {self.attr_tuple}')
         
         try:
             logger.debug(f'{self.brand} > In the try section to drop columns')
@@ -137,6 +143,8 @@ class brands:
     
     def union_brands(clp_df, cogo_df, okay_df, spar_df, dats_df):
         
+        logger.info(f'union data from all brands')
+
         clp_cogo = clp_df.union(cogo_df)
         clp_cogo_okay = clp_cogo.union(okay_df)
         clp_cogo_okay_spar = clp_cogo_okay.union(spar_df)
@@ -148,7 +156,7 @@ class brands:
     def organise_schema(self, df):
         self.df = df
         self.df.createOrReplaceTempView(f'{self.brand}')
-        logger.debug(f'{self.brand} > organise_schema')
+        logger.debug(f'{self.brand} > organise_schema to keep in sync with other brands')
         
         select_query = f"""
             select
@@ -187,11 +195,11 @@ class datasetTransform:
     
     def __init__(self, spark):
         spark = spark
-        logger.debug('datasetTransform class is initiated')
+        logger.info('datasetTransform class is initiated')
 
     @staticmethod
     def extract_postal_code(df):
-        logger.debug('extract_postal_code from address function called')
+        logger.info('extract_postal_code from address function called')
         df = df
         postal_cd_df = df.withColumn('postalcode', col('address.postalcode'))
         postal_cd_df.count()
@@ -217,17 +225,17 @@ class datasetTransform:
                                     "Oost-Vlaanderen": ["9000-9999"]
                                 }
             for k,v in prov_post_dict.items():
-                logger.info(f'key -> {k}')
-                logger.info(f'value -> {v}')
+                logger.debug(f'key -> {k}')
+                logger.debug(f'value -> {v}')
                 #logger.info(type(v))
                 for i in v:
                     lower_end = int(i.split('-')[0])
                     upper_end = int(i.split('-')[1])
-                    logger.info(f'lower_end -> {lower_end}')
-                    logger.info(f'upper_end -> {upper_end}')
+                    logger.debug(f'lower_end -> {lower_end}')
+                    logger.debug(f'upper_end -> {upper_end}')
                     
                     if int(postal_val) in range(lower_end, upper_end):
-                        logger.info('Matched')
+                        logger.debug('Matched')
                         return str(k)
             return ' '
         
@@ -238,10 +246,32 @@ class datasetTransform:
     
     @staticmethod
     def extract_lat_long(df):
+        logger.info(f'Extract latitude and longitude.')
         df = df
         lat_long_df = df.withColumn('latitude', col('geoCoordinates.latitude')) \
                                     .withColumn('longitude', col('geoCoordinates.longitude'))
         return lat_long_df
+    
+    @staticmethod
+    def one_hot_encode(df, attr):
+        
+        logger.info(f'Attempting one_hot_encode on {attr}')
+
+        try:    
+            df = df.filter(f" trim({attr}) != '' ").dropDuplicates()
+        except:
+            df = df.dropDuplicates()
+        
+        indexer = StringIndexer(inputCol=f'{attr}', outputCol=f'{attr}_numeric')
+        indexer_fitted = indexer.fit(df)
+        df_indexed = indexer_fitted.transform(df)
+
+        encoder = OneHotEncoder(inputCols=[f'{attr}_numeric'], outputCols=[f'{attr}_onehot'])
+        df_onehot = encoder.fit(df_indexed).transform(df_indexed)
+        #df_onehot.show()
+
+        logger.info(f'one_hot_encode on {attr} completed')
+        return df_onehot
                 
         
 

@@ -11,9 +11,11 @@ logger_obj = setLogger(logger, 'encrypt')
 logger = logger_obj.set_handler()
 logger.debug('Module encrypt')
 
-def generateEncryptionKeys(spark, df, publish_encrypt_path):
-
+def generateEncryptionKeys(spark, df, publish_df_path, publish_encrypt_path):
+    logger.info(f'Generate encryption key')
+    
     def generate_encrypt_key():
+        logger.info(f'generate_encrypt_key function called')
         from cryptography.fernet import Fernet
         key = Fernet.generate_key()
         return key.decode("utf-8")
@@ -27,17 +29,17 @@ def generateEncryptionKeys(spark, df, publish_encrypt_path):
     df_distinct_record = spark.sql('''select distinct placeId from df''')
     df_distinct_record.count()
     df_distinct_record = df_distinct_record.withColumn("encryption_key", lit(generate_key_using_Fernet()))
-    df_distinct_record.select('placeId', 'encryption_key').show(10,0)
     df_distinct_record.write.option('header', 'True').mode('overwrite').csv(publish_encrypt_path)
+    logger.info(f'Encryption key dataset written to disk')
 
 def encrypt(spark, publish_encrypt_path):
 
+    logger.info(f'Perform Encryption on address attributes')
+    
     encrypr_df = spark.read.option('InferSchema', 'True')\
         .option('header', 'True')\
         .csv(publish_encrypt_path)
-    encrypr_df.show(2,0)
     encrypr_df.createOrReplaceTempView('encryption_keys')
-    logger.debug(encrypr_df.printSchema())
 
 
     # Define Encrypt User Defined Function 
@@ -68,7 +70,6 @@ def encrypt(spark, publish_encrypt_path):
                      .drop("encryption_Key")
     
     logger.info('Final Encryption transform finish')
-    masked_df.show(4,0)
 
     return masked_df
 
