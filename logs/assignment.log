@@ -1,54 +1,54 @@
-2024-04-04 11:02:43,783 - __main__ - INFO - Custom Logger created
-2024-04-04 11:02:43,783 - __main__ - INFO - FMCG analysis job starts
-2024-04-04 11:02:47,540 - __main__ - INFO - CLP DF2 count > 259
-2024-04-04 11:02:47,609 - __main__ - INFO - COGO DF2 count > 276
-2024-04-04 11:02:48,262 - __main__ - INFO - OKAY DF2 count > 169
-2024-04-04 11:02:48,854 - __main__ - INFO - SPAR DF2 count > 217
-2024-04-04 11:02:49,133 - __main__ - INFO - SPAR DF2 count > 145
-2024-04-04 11:02:53,350 - __main__ - INFO - DATS post adding default columns
-2024-04-04 11:02:54,890 - __main__ - INFO - merged_df count > 5422
-2024-04-04 11:03:01,859 - __main__ - INFO - FMCG Brand transformed dataset has been saved to publish directory
+2024-04-04 12:28:46,685 - __main__ - INFO - Custom Logger created
+2024-04-04 12:28:46,685 - __main__ - INFO - FMCG analysis job starts
+2024-04-04 12:28:50,474 - __main__ - INFO - CLP DF2 count > 259
+2024-04-04 12:28:50,535 - __main__ - INFO - COGO DF2 count > 276
+2024-04-04 12:28:51,176 - __main__ - INFO - OKAY DF2 count > 169
+2024-04-04 12:28:51,815 - __main__ - INFO - SPAR DF2 count > 217
+2024-04-04 12:28:52,093 - __main__ - INFO - SPAR DF2 count > 145
+2024-04-04 12:28:56,371 - __main__ - INFO - DATS post adding default columns
+2024-04-04 12:28:58,117 - __main__ - INFO - merged_df count > 5422
+2024-04-04 12:29:08,492 - __main__ - INFO - FMCG Brand transformed dataset has been saved to publish directory
 rthan/Projects/FMCG_Analysis/data/cogo-colpnts.json.
-2024-04-04 11:02:45,885 - transform - INFO - Transform object instantiated > /Users/keerthan/Projects/FMCG_Analysis/data/dats-places.json
-2024-04-04 11:02:45,885 - transform - INFO - Get data by Brand DATS from path /Users/keerthan/Projects/FMCG_Analysis/data/dats-places.json.
-2024-04-04 11:02:45,973 - transform - INFO - Transform object instantiated > /Users/keerthan/Projects/FMCG_Analysis/data/okay-places.json
-2024-04-04 11:02:45,973 - transform - INFO - Get data by Brand OKAY from path /Users/keerthan/Projects/FMCG_Analysis/data/okay-places.json.
-2024-04-04 11:02:46,052 - transform - INFO - Transform object instantiated > /Users/keerthan/Projects/FMCG_Analysis/data/spar-places.json
-2024-04-04 11:02:46,053 - transform - INFO - Get data by Brand SPAR from path /Users/keerthan/Projects/FMCG_Analysis/data/spar-places.json.
-2024-04-04 11:02:46,112 - transform - INFO - Transforming attribute : tempClosure for brand > CLP
-2024-04-04 11:02:46,628 - transform - INFO - CLP > Attempting to explode_array_attribute temporaryClosures
-2024-04-04 11:02:47,540 - transform - INFO - Transforming attribute : tempClosure for brand > COGO
-2024-04-04 11:02:47,609 - transform - INFO - Transforming attribute : tempClosure for brand > OKAY
-2024-04-04 11:02:47,777 - transform - INFO - OKAY > Attempting to explode_array_attribute temporaryClosures
-2024-04-04 11:02:48,263 - transform - INFO - Transforming attribute : tempClosure for brand > SPAR
-2024-04-04 11:02:48,405 - transform - INFO - SPAR > Attempting to explode_array_attribute temporaryClosures
-2024-04-04 11:02:48,854 - transform - INFO - Transforming attribute : tempClosure for brand > DATS
-2024-04-04 11:02:49,133 - transform - INFO - CLP > Attempting to explode_array_attribute handoverServices
-2024-04-04 11:02:49,470 - transform - INFO - COGO > Attempting to explode_array_attribute handoverServices
-2024-04-04 11:02:49,558 - transform - INFO - OKAY > Attempting to explode_array_attribute handoverServices
-2024-04-04 11:02:49,816 - transform - INFO - CLP > Attempting to explode_array_attribute sellingPartners
-2024-04-04 11:02:50,366 - transform - INFO - COGO > Attempting to explode_array_attribute sellingPartners
-2024-04-04 11:02:50,697 - transform - INFO - OKAY > Attempting to explode_array_attribute sellingPartners
-2024-04-04 11:02:51,128 - transform - INFO - SPAR > Adding default string columns ['handoverServices', 'sellingPartners']
-2024-04-04 11:02:51,135 - transform - INFO - CLP > Attempting to explode_array_attribute placeSearchOpeningHours
-2024-04-04 11:02:51,833 - transform - INFO - COGO > Attempting to explode_array_attribute placeSearchOpeningHours
-2024-04-04 11:02:52,400 - transform - INFO - OKAY > Attempting to explode_array_attribute placeSearchOpeningHours
-2024-04-04 11:02:52,973 - transform - INFO - SPAR > Attempting to explode_array_attribute placeSearchOpeningHours
-2024-04-04 11:02:53,333 - transform - INFO - DATS > Adding default string columns ['handoverServices', 'sellingPartners', 'placeSearchOpeningHours_date', 'placeSearchOpeningHours_opens', 'placeSearchOpeningHours_opens', 'placeSearchOpeningHours_closes', 'placeSearchOpeningHours_isToday', 'placeSearchOpeningHours_isOpenForTheDay', 'placeSearchOpeningHours']
-2024-04-04 11:02:53,694 - transform - INFO - CLP > Dropping columns > ('placeSearchOpeningHours', 'placeSearchOpeningHours_isOpenForTheDay', 'placeSearchOpeningHours_isToday')
-2024-04-04 11:02:53,704 - transform - INFO - COGO > Dropping columns > ('placeSearchOpeningHours', 'placeSearchOpeningHours_isOpenForTheDay', 'placeSearchOpeningHours_isToday')
-2024-04-04 11:02:53,712 - transform - INFO - OKAY > Dropping columns > ('placeSearchOpeningHours', 'placeSearchOpeningHours_isOpenForTheDay', 'placeSearchOpeningHours_isToday')
-2024-04-04 11:02:53,719 - transform - INFO - SPAR > Dropping columns > ('placeSearchOpeningHours', 'placeSearchOpeningHours_isOpenForTheDay', 'placeSearchOpeningHours_isToday')
-2024-04-04 11:02:53,726 - transform - INFO - DATS > Dropping columns > ('placeSearchOpeningHours', 'placeSearchOpeningHours_isOpenForTheDay', 'placeSearchOpeningHours_isToday')
-2024-04-04 11:02:53,732 - transform - INFO - union data from all brands
-2024-04-04 11:02:54,890 - transform - INFO - extract_postal_code from address function called
-2024-04-04 11:02:55,688 - transform - INFO - get_province_from_postal_config function called.
-2024-04-04 11:02:55,722 - transform - INFO - Extract latitude and longitude.
-2024-04-04 11:02:55,739 - transform - INFO - Attempting one_hot_encode on handoverServices
-2024-04-04 11:02:57,747 - transform - INFO - one_hot_encode on handoverServices completed
-2024-04-04 11:02:57,747 - encrypt - INFO - Generate encryption key
-2024-04-04 11:02:59,554 - encrypt - INFO - Encryption key dataset written to disk
-2024-04-04 11:02:59,555 - encrypt - INFO - Perform Encryption on address attributes
-2024-04-04 11:02:59,709 - encrypt - INFO - Encryption df join with main df
-2024-04-04 11:02:59,740 - encrypt - INFO - Final Encryption on columns
-2024-04-04 11:02:59,784 - encrypt - INFO - Final Encryption transform finish
+2024-04-04 12:28:48,836 - transform - INFO - Transform object instantiated > /Users/keerthan/Projects/FMCG_Analysis/data/dats-places.json
+2024-04-04 12:28:48,837 - transform - INFO - Get data by Brand DATS from path /Users/keerthan/Projects/FMCG_Analysis/data/dats-places.json.
+2024-04-04 12:28:48,899 - transform - INFO - Transform object instantiated > /Users/keerthan/Projects/FMCG_Analysis/data/okay-places.json
+2024-04-04 12:28:48,899 - transform - INFO - Get data by Brand OKAY from path /Users/keerthan/Projects/FMCG_Analysis/data/okay-places.json.
+2024-04-04 12:28:48,973 - transform - INFO - Transform object instantiated > /Users/keerthan/Projects/FMCG_Analysis/data/spar-places.json
+2024-04-04 12:28:48,973 - transform - INFO - Get data by Brand SPAR from path /Users/keerthan/Projects/FMCG_Analysis/data/spar-places.json.
+2024-04-04 12:28:49,036 - transform - INFO - Transforming attribute : tempClosure for brand > CLP
+2024-04-04 12:28:49,547 - transform - INFO - CLP > Attempting to explode_array_attribute temporaryClosures
+2024-04-04 12:28:50,474 - transform - INFO - Transforming attribute : tempClosure for brand > COGO
+2024-04-04 12:28:50,535 - transform - INFO - Transforming attribute : tempClosure for brand > OKAY
+2024-04-04 12:28:50,707 - transform - INFO - OKAY > Attempting to explode_array_attribute temporaryClosures
+2024-04-04 12:28:51,176 - transform - INFO - Transforming attribute : tempClosure for brand > SPAR
+2024-04-04 12:28:51,330 - transform - INFO - SPAR > Attempting to explode_array_attribute temporaryClosures
+2024-04-04 12:28:51,815 - transform - INFO - Transforming attribute : tempClosure for brand > DATS
+2024-04-04 12:28:52,093 - transform - INFO - CLP > Attempting to explode_array_attribute handoverServices
+2024-04-04 12:28:52,428 - transform - INFO - COGO > Attempting to explode_array_attribute handoverServices
+2024-04-04 12:28:52,528 - transform - INFO - OKAY > Attempting to explode_array_attribute handoverServices
+2024-04-04 12:28:52,756 - transform - INFO - CLP > Attempting to explode_array_attribute sellingPartners
+2024-04-04 12:28:53,331 - transform - INFO - COGO > Attempting to explode_array_attribute sellingPartners
+2024-04-04 12:28:53,675 - transform - INFO - OKAY > Attempting to explode_array_attribute sellingPartners
+2024-04-04 12:28:54,121 - transform - INFO - SPAR > Adding default string columns ['handoverServices', 'sellingPartners']
+2024-04-04 12:28:54,127 - transform - INFO - CLP > Attempting to explode_array_attribute placeSearchOpeningHours
+2024-04-04 12:28:54,945 - transform - INFO - COGO > Attempting to explode_array_attribute placeSearchOpeningHours
+2024-04-04 12:28:55,431 - transform - INFO - OKAY > Attempting to explode_array_attribute placeSearchOpeningHours
+2024-04-04 12:28:56,001 - transform - INFO - SPAR > Attempting to explode_array_attribute placeSearchOpeningHours
+2024-04-04 12:28:56,350 - transform - INFO - DATS > Adding default string columns ['handoverServices', 'sellingPartners', 'placeSearchOpeningHours_date', 'placeSearchOpeningHours_opens', 'placeSearchOpeningHours_opens', 'placeSearchOpeningHours_closes', 'placeSearchOpeningHours_isToday', 'placeSearchOpeningHours_isOpenForTheDay', 'placeSearchOpeningHours']
+2024-04-04 12:28:56,802 - transform - INFO - CLP > Dropping columns > ('placeSearchOpeningHours', 'placeSearchOpeningHours_isOpenForTheDay', 'placeSearchOpeningHours_isToday')
+2024-04-04 12:28:56,815 - transform - INFO - COGO > Dropping columns > ('placeSearchOpeningHours', 'placeSearchOpeningHours_isOpenForTheDay', 'placeSearchOpeningHours_isToday')
+2024-04-04 12:28:56,853 - transform - INFO - OKAY > Dropping columns > ('placeSearchOpeningHours', 'placeSearchOpeningHours_isOpenForTheDay', 'placeSearchOpeningHours_isToday')
+2024-04-04 12:28:56,861 - transform - INFO - SPAR > Dropping columns > ('placeSearchOpeningHours', 'placeSearchOpeningHours_isOpenForTheDay', 'placeSearchOpeningHours_isToday')
+2024-04-04 12:28:56,869 - transform - INFO - DATS > Dropping columns > ('placeSearchOpeningHours', 'placeSearchOpeningHours_isOpenForTheDay', 'placeSearchOpeningHours_isToday')
+2024-04-04 12:28:56,875 - transform - INFO - union data from all brands
+2024-04-04 12:28:58,117 - transform - INFO - extract_postal_code from address function called
+2024-04-04 12:28:58,832 - transform - INFO - get_province_from_postal_config function called.
+2024-04-04 12:28:58,865 - transform - INFO - Extract latitude and longitude.
+2024-04-04 12:28:58,883 - transform - INFO - Attempting one_hot_encode on handoverServices
+2024-04-04 12:29:00,892 - transform - INFO - one_hot_encode on handoverServices completed
+2024-04-04 12:29:00,892 - encrypt - INFO - Generate encryption key
+2024-04-04 12:29:04,240 - encrypt - INFO - Encryption key dataset written to disk
+2024-04-04 12:29:04,240 - encrypt - INFO - Perform Encryption on address attributes
+2024-04-04 12:29:04,360 - encrypt - INFO - Encryption df join with main df
+2024-04-04 12:29:04,397 - encrypt - INFO - Final Encryption on columns
+2024-04-04 12:29:04,452 - encrypt - INFO - Final Encryption transform finish

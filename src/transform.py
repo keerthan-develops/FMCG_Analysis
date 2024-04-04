@@ -258,20 +258,26 @@ class datasetTransform:
         logger.info(f'Attempting one_hot_encode on {attr}')
 
         try:    
-            df = df.filter(f" trim({attr}) != '' ").dropDuplicates()
+            df_filtered = df.filter(f" trim({attr}) != '' ").dropDuplicates()
         except:
-            df = df.dropDuplicates()
+            df_filtered = df.dropDuplicates()
         
         indexer = StringIndexer(inputCol=f'{attr}', outputCol=f'{attr}_numeric')
-        indexer_fitted = indexer.fit(df)
-        df_indexed = indexer_fitted.transform(df)
+        indexer_fitted = indexer.fit(df_filtered)
+        df_indexed = indexer_fitted.transform(df_filtered)
 
         encoder = OneHotEncoder(inputCols=[f'{attr}_numeric'], outputCols=[f'{attr}_onehot'])
         df_onehot = encoder.fit(df_indexed).transform(df_indexed)
         #df_onehot.show()
+        df_onehot_str = df_onehot.withColumn(f'{attr}_numeric', col(f'{attr}_numeric').cast(StringType())) \
+            .withColumn(f'{attr}_onehot', col(f'{attr}_onehot').cast(StringType()))
+
+        # Merge filtered rows into onehot encode datafraame
+        df_null_hot = df.withColumn(f'{attr}_numeric', lit('')).withColumn(f'{attr}_onehot', lit(''))
+        df_oneHot_union = df_onehot_str.union(df_null_hot)
 
         logger.info(f'one_hot_encode on {attr} completed')
-        return df_onehot
+        return df_oneHot_union
                 
         
 
