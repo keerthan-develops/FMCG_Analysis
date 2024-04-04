@@ -1,17 +1,17 @@
 FMCG Analysis
 
 Design and Folder Structure
- 
-FMCG_ANALYSIS
-    data -> Contains the input data (json files from all brands)
-    logs -> Contains the log file (assignment.log)
-    publish ->  Contains
-                    1. Transformed/Output dataset is loaded into this directory.
-                    2. Encryption Keys for PII data stored in this directory.
-    src     -> Contains the source code, main file and all the dependent py files.
-    pipfile.txt
-    README.md 
-    run_script.sh -> Command for running the spark job
+
+    FMCG_ANALYSIS
+        data -> Contains the input data (json files from all brands)
+        logs -> Contains the log file (assignment.log)
+        publish ->  Contains
+                        1. Transformed/Output dataset is loaded into this directory.
+                        2. Encryption Keys for PII data stored in this directory.
+        src     -> Contains the source code, main file and all the dependent py files.
+        pipfile.txt
+        README.md 
+        run_script.sh -> Command for running the spark job
 
 
 Outcome of this Assignment is listed as follows,
